@@ -1,0 +1,21 @@
+.navbar-brand {
+  background: orange;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 3% 1.5%;
+  margin-top: 1%;
+  border-radius: 50px;
+  color: white;
+}
+.navbar-nav {
+  width: 50%;
+  .nav-link {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: black !important;
+    margin-top: 2% !important;
+    letter-spacing: 1px;
+    margin-left: 2%;
+    width: 100%;
+  }
+}

@@ -1,0 +1,47 @@
+.homepage {
+  height: 99.9vh;
+  width: 100%;
+  background-image: url("../../../assets/5566879.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  #main {
+    display: flex;
+    align-items: center;
+    height: 80vh;
+    width: 100%;
+    justify-content: center;
+    .main-text {
+      width: 40%;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.5;
+      .homepage-clicks {
+        margin-top: 2%;
+        button {
+          color: white;
+          background-color: orange;
+          font-weight: 500;
+          border: none !important;
+          outline: none;
+          margin-right: 3%;
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+  &-icon {
+    width: 30%;
+    height: 100%;
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+// #main .main-text {
+//   font-size: 45px;
+//   font-weight: 700;
+//   line-height: 1.5;
+// }
