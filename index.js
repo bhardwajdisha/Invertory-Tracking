@@ -7,7 +7,6 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const routes = require('./routes');
 const bodyParser = require('body-parser');
-const ExpressError = require('./utilis/ExpressError');
 const dbUrl = process.env.dbUrl;
 
 mongoose.connect(dbUrl,{
