@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const routes = require('./routes');
 const bodyParser = require('body-parser');
+const ExpressError = require('./utilis/ExpressError');
 const dbUrl = process.env.dbUrl;
 
 mongoose.connect(dbUrl,{
@@ -28,6 +29,20 @@ app.get('/check',(req,res)=>{
     res.send('HI');
 })
 app.use('/inventory',routes);
+
+app.all('*',(req,res,next)=>{
+    const err ={
+        message:'Page not Found',
+        status:404,
+    }
+    next(err);
+})
+
+app.use((err,req,res,next)=>{
+    const { status =500 }=err;
+    if(!err.message) err.message='Oh No!Something Went Wrong'
+    res.status(status).send(err.message);  
+})
 
 app.listen(3000,(req,res)=>{
     console.log('Server started on port 3000');
