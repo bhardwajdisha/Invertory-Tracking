@@ -24,7 +24,7 @@ const Homepage = () => {
         <div className="homepage-icon">
           <iframe
             title="icon"
-            classname="homepage-icon-cart"
+            className="homepage-icon-cart"
             src="https://embed.lottiefiles.com/animation/36605"
           ></iframe>
         </div>

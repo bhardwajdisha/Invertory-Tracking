@@ -1,19 +1,14 @@
-import React from "react";
-import MainNavbar from "../../../components/Navbar/Navbar";
+import React, { useContext } from "react";
+import MainNavbar from "../../components/Navbar/Navbar";
 import { Button, Table } from "react-bootstrap";
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
 import "./products.scss";
-const data = [
-  {
-    name: "Pepsi",
-    price: 30,
-    quantity: 120,
-    location: "warhouse1",
-    updated: "03/04/2022",
-  },
-];
+import { InventoryContext } from "../../providers/inventory.provider";
+import DeleteInvenotry from "../../components/DeleteInventory/deleteInvenotry";
+import EditInventory from "../../components/EditInventory/EditInventory";
+
 const Products = () => {
+  const { inventoryData } = useContext(InventoryContext);
+
   return (
     <div className="products container">
       <MainNavbar />
@@ -41,23 +36,22 @@ const Products = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((val, key) => {
+            {inventoryData.map((val, key) => {
               return (
-                <tr key={key}>
+                <tr key={val._id}>
                   <td>{key + 1}</td>
-                  <td>{val.name}</td>
-                  <td>{val.quantity}</td>
-                  <td>{val.price}</td>
-                  <td>{val.location}</td>
-                  <td>{val.updated}</td>
+                  <td>{val.ItemName}</td>
+                  <td>{val.TotalQty}</td>
+                  <td>{val.Price}</td>
+                  <td>{val.Location}</td>
+                  <td>{val.Updated}</td>
                   <td>
-                    <button>
-                      {" "}
-                      <MdDelete />
-                    </button>
-                    <button>
-                      <FaEdit />
-                    </button>
+                    <div>
+                      <DeleteInvenotry item={val} />
+                    </div>
+                    <div>
+                      <EditInventory item={val} />
+                    </div>
                   </td>
                 </tr>
               );
