@@ -7,6 +7,7 @@ const InventorySchema = new Schema({
   TotalQty: Number,
   Location: String,
   Updated: String,
+  updatedAt: Date,
 });
 
 module.exports = mongoose.model("InventorySchema", InventorySchema);

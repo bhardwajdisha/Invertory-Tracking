@@ -25,6 +25,7 @@ const seedDB = async () => {
       TotalQty: `${data[i].TotalQty}`,
       Location: `${data[i].Location}`,
       Updated: today.toDateString(),
+      updatedAt: today,
     });
     await newItem.save();
   }

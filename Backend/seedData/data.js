@@ -47,4 +47,22 @@ module.exports = [
     TotalQty: 110,
     Location: "Warehouse3",
   },
+  {
+    ItemName: "CornFlakes",
+    Price: 95,
+    TotalQty: 55,
+    Location: "Warehouse1",
+  },
+  {
+    ItemName: "Butter",
+    Price: 115,
+    TotalQty: 30,
+    Location: "Warehouse3",
+  },
+  {
+    ItemName: "Ketchup",
+    Price: 112,
+    TotalQty: 90,
+    Location: "Warehouse1",
+  },
 ];
