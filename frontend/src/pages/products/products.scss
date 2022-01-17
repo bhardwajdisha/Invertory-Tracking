@@ -8,11 +8,93 @@
       margin-top: 1%;
     }
     &-link {
+      width: 100%;
       display: flex;
-      justify-content: space-between;
-      margin: 4% 6% 3% 4%;
+      margin: 4% 6% 3% 0%;
+      &-formDiv {
+        width: 100%;
+        .search-form {
+          width: 100%;
+          .search-icon {
+            position: absolute;
+            margin-left: 0.7rem;
+            padding-bottom: 0.3rem;
+            height: 2rem;
+            width: 1.2rem;
+            opacity: 0.7;
+            z-index: 1;
+            margin-top: 0.5%;
+          }
+          &-input {
+            width: 100%;
+            position: relative;
+          }
+          .form-control {
+            padding-left: 2.4rem !important;
+            border-radius: 15px;
+          }
+          button {
+            margin-left: 2%;
+            background-color: rgb(255, 175, 25);
+            color: white;
+            font-weight: 500;
+            border: none;
+            outline: none;
+          }
+        }
+      }
+      &-buttons {
+        display: flex;
+        justify-content: flex-end;
+        width: 30%;
+        &-filter {
+          margin-right: 6%;
+          button {
+            height: 100%;
+            background-color: rgb(255, 175, 25) !important;
+            color: white;
+            font-weight: 500;
+            border: none;
+            outline: none;
+          }
+        }
+      }
     }
   }
-  //   &-inside {
-  //   }
+  &-inside {
+    table {
+      --bs-table-striped-bg: rgba(255, 128, 0, 0.123);
+      --bs-table-hover-bg: rgb(255 128 0 / 39%);
+    }
+    .table > :not(caption) > * > * {
+      padding: 0.8rem 0.5rem;
+    }
+    &-productTable {
+      text-align: center;
+      .table-row1 {
+        text-transform: uppercase;
+        .tableBtns {
+          width: 6% !important;
+        }
+      }
+      .table-row2 {
+        .table-sno {
+          font-weight: bold;
+        }
+        .table-deleteEdit {
+          display: flex;
+          justify-content: space-around;
+          button {
+            background: transparent;
+            border: none;
+            font-size: 1.3rem;
+            padding-right: 1.2rem;
+          }
+        }
+      }
+      td {
+        cursor: pointer;
+      }
+    }
+  }
 }

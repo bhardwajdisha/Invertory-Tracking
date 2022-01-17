@@ -1,0 +1,36 @@
+.addInventoryBtn {
+  height: 100%;
+  background-color: rgb(255, 175, 25) !important;
+  color: white;
+  font-weight: 500;
+  border: none !important;
+  outline: none;
+}
+.products-modal {
+  &-body {
+    padding: 1rem 8rem !important;
+    &-form {
+      div {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 3%;
+        label {
+          margin-bottom: 1%;
+          font-weight: bold;
+        }
+        input {
+          border-radius: 5px;
+          border-color: rgba(44, 44, 44, 0.411);
+          padding: 1% 2%;
+        }
+      }
+      &-savebutton {
+        width: 100%;
+        button {
+          width: 40%;
+          margin: auto;
+        }
+      }
+    }
+  }
+}

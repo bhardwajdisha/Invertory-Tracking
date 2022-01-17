@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { InventoryContext } from "../../providers/inventory.provider";
+import "./AddInventory.scss";
 
 const AddInventory = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -13,6 +14,7 @@ const AddInventory = () => {
     TotalQty: 0,
     Location: "",
     Updated: new Date(Date.now()).toDateString(),
+    updatedAt: new Date(Date.now()),
   });
 
   const handleChange = (e) => {
@@ -25,9 +27,7 @@ const AddInventory = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const date = new Date(Date.now());
-    // const Updated = date.toDateString();
-    const { ItemName, Price, TotalQty, Location, Updated } = itemDetails;
+    const { ItemName, Price, TotalQty, Location } = itemDetails;
     fetch(`http://localhost:3001/inventory`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -36,10 +36,8 @@ const AddInventory = () => {
         Price,
         TotalQty,
         Location,
-        Updated,
       }),
     });
-    console.log(itemDetails);
     await addInventoryData(itemDetails);
     fetchData();
     setModalShow(false);
@@ -55,12 +53,13 @@ const AddInventory = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={() => setModalShow(true)}>
+      <Button className="addInventoryBtn" onClick={() => setModalShow(true)}>
         Add New Product
       </Button>
       <Modal
         show={modalShow}
         size="lg"
+        className="products-modal"
         aria-labelledby="contained-modal-title-vcenter"
         onHide={() => setModalShow(false)}
         centered
@@ -70,9 +69,9 @@ const AddInventory = () => {
             Add New Product
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="products-modal-body">
           <div>
-            <form onSubmit={handleSubmit}>
+            <form className="products-modal-body-form" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name">Name</label>
                 <input
@@ -121,12 +120,19 @@ const AddInventory = () => {
                   required
                 />
               </div>
-              <Button type="submit"> Save Changes</Button>
+              <div className="products-modal-body-form-savebutton">
+                <Button variant="success" type="submit">
+                  {" "}
+                  Save Changes
+                </Button>
+              </div>
             </form>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => setModalShow(false)}>Cancel</Button>
+          <Button variant="dark" onClick={() => setModalShow(false)}>
+            Cancel
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

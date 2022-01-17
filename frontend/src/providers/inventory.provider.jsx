@@ -17,9 +17,9 @@ const InventoryProvider = ({ children }) => {
   const fetchData = async () => {
     fetch("http://localhost:3001/inventory", { mode: "cors" })
       .then((res) => res.json())
-      .then((item) => {
-        setInventoryData(item);
-      });
+      .then((res) => res.data)
+      .then((data) => data.items)
+      .then((item) => setInventoryData(item));
   };
   const removeInventoryData = (item) =>
     setInventoryData(removeItem(inventoryData, item));

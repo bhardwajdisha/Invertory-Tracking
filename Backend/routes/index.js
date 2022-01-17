@@ -6,6 +6,10 @@ const catchAsync = require("../utilis/catchAsync");
 router.get(
   "/",
   catchAsync(async (req, res) => {
+    // if (Object.keys(req.query).length === 0) {
+    //   const data = await Inventory.find({});
+    //   res.send(data);
+    // } else {
     const query = [];
     //Find by Itemname or Location
     if (req.query.keyword && req.query.keyword != " ") {
@@ -51,7 +55,7 @@ router.get(
       });
     } else {
       query.push({
-        $sort: {},
+        $sort: { updatedAt: -1 },
       });
     }
 
@@ -102,7 +106,7 @@ router.put(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const today = new Date(Date.now());
-    const { ItemName, TotalQty, Price, Location, Updated } = req.body;
+    const { ItemName, TotalQty, Price, Location } = req.body;
     await Inventory.findByIdAndUpdate(id, {
       TotalQty,
       Price,

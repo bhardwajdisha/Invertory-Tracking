@@ -19,48 +19,58 @@ const Products = () => {
           <h1>Products</h1>
         </div>
         <div className="products-header-link">
-          <div>
+          <div className="products-header-link-formDiv">
             <Form className="d-flex search-form">
               <AiOutlineSearch className="search-icon" />
               <FormControl
                 type="search"
-                placeholder="Search by name"
-                className="me-2"
+                placeholder="Search by name or Warehouse No. 1,2,3"
+                className="search-form-input"
                 aria-label="Search"
                 // onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
               />
+              <Button type="submit">Search</Button>
             </Form>
           </div>
-          <Button>Filters</Button>
-          <div>
-            <AddInventory />
+          <div className="products-header-link-buttons">
+            <div className="products-header-link-buttons-filter">
+              <Button>Filters</Button>
+            </div>
+            <div>
+              <AddInventory />
+            </div>
           </div>
         </div>
       </div>
       <div className="products-inside">
-        <Table responsive hover striped>
+        <Table
+          className="products-inside-productTable"
+          responsive
+          hover
+          striped
+        >
           <thead>
-            <tr>
+            <tr className="table-row1">
               <th>S.No</th>
               <th>Name</th>
               <th>Quantity</th>
               <th>Price</th>
               <th>location</th>
               <th>Last Modified</th>
-              <th></th>
+              <th className="tableBtns"></th>
             </tr>
           </thead>
           <tbody>
             {inventoryData.map((val, key) => {
               return (
-                <tr key={val._id}>
-                  <td>{key + 1}</td>
+                <tr key={val._id} className="table-row2">
+                  <td className="table-sno">{key + 1}</td>
                   <td>{val.ItemName}</td>
                   <td>{val.TotalQty}</td>
                   <td>{val.Price}</td>
                   <td>{val.Location}</td>
                   <td>{val.Updated}</td>
-                  <td>
+                  <td className="table-deleteEdit">
                     <div>
                       <DeleteInventory item={val} />
                     </div>
