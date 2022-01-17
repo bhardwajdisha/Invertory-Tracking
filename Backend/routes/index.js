@@ -14,11 +14,13 @@ router.get(
 router.post(
   "/",
   catchAsync(async (req, res) => {
-    const { ItemName, Price, TotalQty } = req.body;
+    const { ItemName, Price, TotalQty, Location, Updated } = req.body;
     const newItem = new Inventory({
       ItemName,
       Price,
       TotalQty,
+      Location,
+      Updated,
     });
     await newItem.save().then(() => res.send("Item Added"));
   })
@@ -37,16 +39,14 @@ router.put(
   "/edit/:id",
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const { ItemName, TotalQty, Price, Location } = req.body;
-    const date = new Date(Date.now());
-    const Updated = date.toDateString();
+    const { ItemName, TotalQty, Price, Location, Updated } = req.body;
     await Inventory.findByIdAndUpdate(id, {
       TotalQty,
       Price,
       ItemName,
       Location,
       Updated,
-    }).then(() => console.log("Item updated"));
+    }).then(() => res.send("Item updated"));
   })
 );
 

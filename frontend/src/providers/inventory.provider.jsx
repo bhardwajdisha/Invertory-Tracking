@@ -1,34 +1,38 @@
 import React, { createContext, useState, useEffect } from "react";
-import { removeItem, addItem } from "./inventory.utils";
+import { removeItem, addItems } from "./inventory.utils";
 
 export const InventoryContext = createContext({
   addInventoryData: () => {},
   inventoryData: [],
   removeInventoryData: () => {},
+  fetchData: () => {},
 });
 
 const InventoryProvider = ({ children }) => {
   const [inventoryData, setInventoryData] = useState([]);
 
   useEffect(() => {
+    fetchData();
+  }, []);
+  const fetchData = async () => {
     fetch("http://localhost:3001/inventory", { mode: "cors" })
       .then((res) => res.json())
       .then((item) => {
         setInventoryData(item);
       });
-  }, [inventoryData]);
-
+  };
   const removeInventoryData = (item) =>
     setInventoryData(removeItem(inventoryData, item));
 
   const addInventoryData = (item) =>
-    setInventoryData(addItem(inventoryData, item));
+    setInventoryData(addItems(inventoryData, item));
   return (
     <InventoryContext.Provider
       value={{
         inventoryData,
         removeInventoryData,
         addInventoryData,
+        fetchData,
       }}
     >
       {children}

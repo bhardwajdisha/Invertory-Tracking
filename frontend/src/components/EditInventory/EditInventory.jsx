@@ -5,7 +5,7 @@ import { InventoryContext } from "../../providers/inventory.provider";
 
 const EditInventory = ({ item }) => {
   const [modalShow, setModalShow] = useState(false);
-  const { inventoryData, addInventoryData } = useContext(InventoryContext);
+  const { fetchData, addInventoryData } = useContext(InventoryContext);
 
   const [itemDetails, setItemDetails] = useState({
     _id: item._id,
@@ -13,6 +13,7 @@ const EditInventory = ({ item }) => {
     Price: item.Price,
     TotalQty: item.TotalQty,
     Location: item.Location,
+    Updated: new Date(Date.now()).toDateString(),
   });
 
   const handleChange = (e) => {
@@ -23,9 +24,12 @@ const EditInventory = ({ item }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { ItemName, Price, TotalQty, Location } = itemDetails;
+    // const date = new Date(Date.now());
+    // const today = date.toDateString();
+    // await setItemDetails((prevDetials) => ({ ...prevDetials, Updated: today }));
+    const { ItemName, Price, TotalQty, Location, Updated } = itemDetails;
     fetch(`http://localhost:3001/inventory/edit/${item._id}`, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
@@ -34,9 +38,12 @@ const EditInventory = ({ item }) => {
         Price,
         TotalQty,
         Location,
+        Updated,
       }),
     });
-    addInventoryData(inventoryData, itemDetails);
+    await addInventoryData(itemDetails);
+    fetchData();
+    setModalShow(false);
   };
 
   return (
@@ -60,7 +67,7 @@ const EditInventory = ({ item }) => {
           <div>
             <form onSubmit={handleSubmit}>
               <div>
-                <label for="name">Name</label>
+                <label htmlFor="name">Name</label>
                 <input
                   type="text"
                   id="name"
@@ -72,7 +79,7 @@ const EditInventory = ({ item }) => {
                 />
               </div>
               <div>
-                <label for="qty">Quantity</label>
+                <label htmlFor="qty">Quantity</label>
                 <input
                   type="number"
                   id="qty"
@@ -84,7 +91,7 @@ const EditInventory = ({ item }) => {
                 />
               </div>
               <div>
-                <label for="price">Price</label>
+                <label htmlFor="price">Price</label>
                 <input
                   type="number"
                   id="price"
@@ -96,7 +103,7 @@ const EditInventory = ({ item }) => {
                 />
               </div>
               <div>
-                <label for="location">Location</label>
+                <label htmlFor="location">Location</label>
                 <input
                   type="text"
                   id="location"

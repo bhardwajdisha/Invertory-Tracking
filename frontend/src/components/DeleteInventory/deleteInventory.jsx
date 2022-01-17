@@ -3,17 +3,18 @@ import { Button, Modal } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
 import { InventoryContext } from "../../providers/inventory.provider";
 
-const DeleteInvenotry = ({ item }) => {
+const DeleteInventory = ({ item }) => {
   const [show, setShow] = useState(false);
-  const { inventoryData, removeInventoryData } = useContext(InventoryContext);
+  const { fetchData, removeInventoryData } = useContext(InventoryContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const deleteInventoryData = (val) => {
+  const deleteInventoryData = async (val) => {
     fetch(`http://localhost:3001/inventory/delete/${val._id}`, {
       method: "DELETE",
       mode: "cors",
     });
-    removeInventoryData(inventoryData, val);
+    await removeInventoryData(val);
+    fetchData();
     setShow(false);
   };
   return (
@@ -40,4 +41,4 @@ const DeleteInvenotry = ({ item }) => {
   );
 };
 
-export default DeleteInvenotry;
+export default DeleteInventory;

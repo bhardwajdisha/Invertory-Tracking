@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import MainNavbar from "../../components/Navbar/Navbar";
-import { Button, Table } from "react-bootstrap";
+import { Button, Table, Form, FormControl } from "react-bootstrap";
+import { AiOutlineSearch } from "react-icons/ai";
 import "./products.scss";
 import { InventoryContext } from "../../providers/inventory.provider";
-import DeleteInvenotry from "../../components/DeleteInventory/deleteInvenotry";
+import DeleteInventory from "../../components/DeleteInventory/deleteInventory";
 import EditInventory from "../../components/EditInventory/EditInventory";
+import AddInventory from "../../components/AddInventory/AddInventory";
 
 const Products = () => {
   const { inventoryData } = useContext(InventoryContext);
-
   return (
     <div className="products container">
       <MainNavbar />
@@ -18,12 +19,26 @@ const Products = () => {
           <h1>Products</h1>
         </div>
         <div className="products-header-link">
-          <Button> Add a new product</Button>
+          <div>
+            <Form className="d-flex search-form">
+              <AiOutlineSearch className="search-icon" />
+              <FormControl
+                type="search"
+                placeholder="Search by name"
+                className="me-2"
+                aria-label="Search"
+                // onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+              />
+            </Form>
+          </div>
           <Button>Filters</Button>
+          <div>
+            <AddInventory />
+          </div>
         </div>
       </div>
       <div className="products-inside">
-        <Table responsive hover>
+        <Table responsive hover striped>
           <thead>
             <tr>
               <th>S.No</th>
@@ -47,7 +62,7 @@ const Products = () => {
                   <td>{val.Updated}</td>
                   <td>
                     <div>
-                      <DeleteInvenotry item={val} />
+                      <DeleteInventory item={val} />
                     </div>
                     <div>
                       <EditInventory item={val} />
