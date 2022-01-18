@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MainNavbar from "../../components/Navbar/Navbar";
 import { Button, Table, Form, FormControl } from "react-bootstrap";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -7,9 +7,28 @@ import { InventoryContext } from "../../providers/inventory.provider";
 import DeleteInventory from "../../components/DeleteInventory/deleteInventory";
 import EditInventory from "../../components/EditInventory/EditInventory";
 import AddInventory from "../../components/AddInventory/AddInventory";
+import FilterData from "../../components/FilterInventory/FilterData";
 
 const Products = () => {
-  const { inventoryData } = useContext(InventoryContext);
+  const { inventoryData, queryString, updateInventoryData } =
+    useContext(InventoryContext);
+  const [search, setSearch] = useState(" ");
+
+  useEffect(() => {
+    updateInventoryData();
+  }, [search]);
+
+  const setSearchTerm = (e) => {
+    setSearch(e);
+    queryString[0].keyword = e;
+    console.log(queryString[0].keyword);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateInventoryData();
+  };
+
   return (
     <div className="products container">
       <MainNavbar />
@@ -20,21 +39,22 @@ const Products = () => {
         </div>
         <div className="products-header-link">
           <div className="products-header-link-formDiv">
-            <Form className="d-flex search-form">
+            <Form className="d-flex search-form" onSubmit={handleSubmit}>
               <AiOutlineSearch className="search-icon" />
               <FormControl
                 type="search"
                 placeholder="Search by name or Warehouse No. 1,2,3"
                 className="search-form-input"
                 aria-label="Search"
-                // onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <Button type="submit">Search</Button>
             </Form>
           </div>
           <div className="products-header-link-buttons">
             <div className="products-header-link-buttons-filter">
-              <Button>Filters</Button>
+              {/* <Button>Filters</Button> */}
+              <FilterData />
             </div>
             <div>
               <AddInventory />
@@ -84,6 +104,7 @@ const Products = () => {
           </tbody>
         </Table>
       </div>
+      <div className="products-pagination">Hello</div>
     </div>
   );
 };

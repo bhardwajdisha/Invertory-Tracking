@@ -12,7 +12,7 @@ router.get(
     // } else {
     const query = [];
     //Find by Itemname or Location
-    if (req.query.keyword && req.query.keyword != " ") {
+    if (req.query.keyword && req.query.keyword != null) {
       await query.push({
         $match: {
           $or: [
@@ -47,7 +47,11 @@ router.get(
       query.push({
         $sort: sort,
       });
-    } else if (req.query.sortBy && req.query.sortOrder) {
+    } else if (
+      req.query.sortBy &&
+      req.query.sortBy != " " &&
+      req.query.sortOrder
+    ) {
       var sort = {};
       sort[req.query.sortBy] = req.query.sortOrder == "asc" ? 1 : -1;
       query.push({
