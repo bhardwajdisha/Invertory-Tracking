@@ -10,11 +10,6 @@ const DeleteInventory = ({ item }) => {
   const handleShow = () => setShow(true);
 
   const deleteInventoryData = async (val) => {
-    // const url =
-    //   process.env.NODE_ENV === "development"
-    //     ? `http://localhost:3001/inventory/delete/${val._id}`
-    //     : `https://inventory-management95.herokuapp.com/inventory/delete/${val._id}`;
-
     fetch(`${process.env.REACT_APP_URL}/delete/${val._id}`, {
       method: "DELETE",
       mode: "cors",
