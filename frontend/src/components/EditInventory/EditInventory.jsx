@@ -37,6 +37,7 @@ const EditInventory = ({ item }) => {
 
     fetch(url, {
       method: "PUT",
+      mode: "cors",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
         ItemName,
