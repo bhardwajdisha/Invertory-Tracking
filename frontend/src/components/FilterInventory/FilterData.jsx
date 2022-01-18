@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { InventoryContext } from "../../providers/inventory.provider";
+import "./FilterData.scss";
 
 const filterData = [
   {
@@ -25,13 +26,17 @@ const FilterData = () => {
   };
   return (
     <Dropdown>
-      <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+      <Dropdown.Toggle
+        id="dropdown-button-example1"
+        className="dropdown-filter"
+      >
         Filters
       </Dropdown.Toggle>
 
       <Dropdown.Menu variant="dark">
         {filterData.map((item) => (
           <DropdownButton
+            className="dropdown-subBtns"
             key={item.id}
             id={item.id}
             menuVariant="dark"

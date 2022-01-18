@@ -1,0 +1,16 @@
+.dropdown-filter {
+  background-color: orange !important;
+  border: none !important;
+  outline: none !important;
+}
+.dropdown-subBtns {
+  button {
+    width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    text-align: start !important;
+    &:focus {
+      outline: none !important;
+    }
+  }
+}

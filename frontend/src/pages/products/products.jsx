@@ -10,22 +10,38 @@ import AddInventory from "../../components/AddInventory/AddInventory";
 import FilterData from "../../components/FilterInventory/FilterData";
 
 const Products = () => {
-  const { inventoryData, queryString, updateInventoryData } =
+  const { inventoryData, queryString, updateInventoryData, totalPages } =
     useContext(InventoryContext);
+
+  const [pageNumber, setPageNumber] = useState([]);
   const [search, setSearch] = useState(" ");
+
+  useEffect(() => {
+    setPages();
+  }, [totalPages]);
 
   useEffect(() => {
     updateInventoryData();
   }, [search]);
 
+  const setPages = () => {
+    setPageNumber([]);
+    for (let i = 1; i <= totalPages; i++) {
+      setPageNumber((currentData) => [...currentData, i]);
+    }
+  };
+
   const setSearchTerm = (e) => {
     setSearch(e);
     queryString[0].keyword = e;
-    console.log(queryString[0].keyword);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const handlePagination = (i) => {
+    queryString[0].page = i;
     updateInventoryData();
   };
 
@@ -34,7 +50,7 @@ const Products = () => {
       <MainNavbar />
       <div className="products-header">
         <div className="products-header-shadow" />
-        <div>
+        <div className="products-header-heading">
           <h1>Products</h1>
         </div>
         <div className="products-header-link">
@@ -53,7 +69,6 @@ const Products = () => {
           </div>
           <div className="products-header-link-buttons">
             <div className="products-header-link-buttons-filter">
-              {/* <Button>Filters</Button> */}
               <FilterData />
             </div>
             <div>
@@ -104,7 +119,19 @@ const Products = () => {
           </tbody>
         </Table>
       </div>
-      <div className="products-pagination">Hello</div>
+      <div className="products-pagination">
+        {pageNumber.map((item) => {
+          return (
+            <Button
+              variant="outline-dark"
+              key={item}
+              onClick={() => handlePagination(item)}
+            >
+              {item}
+            </Button>
+          );
+        })}
+      </div>
     </div>
   );
 };

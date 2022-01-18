@@ -16,9 +16,6 @@ const Homepage = () => {
             <Link to="/products">
               <Button> Products </Button>
             </Link>
-            <Link to="/warehouse">
-              <Button> Warehouse </Button>
-            </Link>
           </div>
         </div>
         <div className="homepage-icon">

@@ -26,17 +26,6 @@ router.get(
         },
       });
     }
-    //Pagination
-    const total = await Inventory.countDocuments(query);
-    let page = req.query.page ? parseInt(req.query.page) : 1;
-    let perPage = req.query.perPage ? parseInt(req.query.perPage) : 7;
-    let skip = (page - 1) * perPage;
-    query.push({
-      $skip: skip,
-    });
-    query.push({
-      $limit: perPage,
-    });
     //Sort
     if (
       (req.query.sortBy == "Updated" || req.query.sortBy == "updated") &&
@@ -62,6 +51,18 @@ router.get(
         $sort: { updatedAt: -1 },
       });
     }
+
+    //Pagination
+    let total = (await Inventory.aggregate(query)).length;
+    let page = req.query.page ? parseInt(req.query.page) : 1;
+    let perPage = req.query.perPage ? parseInt(req.query.perPage) : 7;
+    let skip = (page - 1) * perPage;
+    query.push({
+      $skip: skip,
+    });
+    query.push({
+      $limit: perPage,
+    });
 
     const items = await Inventory.aggregate(query);
     res.send({

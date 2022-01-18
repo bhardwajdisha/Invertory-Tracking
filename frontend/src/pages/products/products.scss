@@ -7,10 +7,20 @@
       box-shadow: 5px 0px 5px #00000057;
       margin-top: 1%;
     }
+    &-heading {
+      margin-top: 2%;
+      text-align: center;
+      h1 {
+        font-size: 3rem;
+        text-transform: uppercase;
+        color: black;
+        text-decoration: underline;
+      }
+    }
     &-link {
       width: 100%;
       display: flex;
-      margin: 4% 6% 3% 0%;
+      margin: 2% 6% 3% 0%;
       &-formDiv {
         width: 100%;
         .search-form {
@@ -87,6 +97,17 @@
       td {
         cursor: pointer;
       }
+    }
+  }
+  &-pagination {
+    text-align: end;
+    padding-bottom: 2rem;
+    button {
+      margin-right: 2%;
+      outline: none;
+      background: transparent;
+      color: black;
+      border: 1px solid black;
     }
   }
 }

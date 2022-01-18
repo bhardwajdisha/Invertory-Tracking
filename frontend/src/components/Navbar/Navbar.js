@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { FaRegUserCircle } from "react-icons/fa";
 import { GrBasket } from "react-icons/gr";
+import { Link } from "react-router-dom";
 import "./Navbar.scss";
 
 const MainNavbar = () => {
@@ -15,13 +16,9 @@ const MainNavbar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <Nav.Link href="#inventory">Products</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Warehouse
-            </Nav.Link>
-            <Nav.Link eventKey={3} href="#memes">
-              Transactions
-            </Nav.Link>
+            <Nav className="products-nav">
+              <Link to="/products">Products</Link>
+            </Nav>
             <Nav.Link eventKey={4} href="#memes">
               User <FaRegUserCircle />
             </Nav.Link>
