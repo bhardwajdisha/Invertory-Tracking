@@ -26,7 +26,12 @@ const InventoryProvider = ({ children }) => {
   }, []);
 
   const fetchData = async () => {
-    await fetch("http://localhost:3001/inventory", { mode: "cors" })
+    const url =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3001/inventory"
+        : "https://inventory-management95.herokuapp.com/inventory";
+
+    await fetch(url, { mode: "cors" })
       .then((res) => res.json())
       .then((res) => res.data)
       .then((data) => {
@@ -43,8 +48,13 @@ const InventoryProvider = ({ children }) => {
     setInventoryData(addItems(inventoryData, item));
 
   const updateInventoryData = async () => {
+    const url =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3001/inventory"
+        : "https://inventory-management95.herokuapp.com/inventory";
+
     await fetch(
-      `http://localhost:3001/inventory?sortBy=${
+      `${url}?sortBy=${
         queryString[0].sortBy ? queryString[0].sortBy : " "
       }&sortOrder=${
         queryString[0].sortOrder ? queryString[0].sortOrder : `asc`

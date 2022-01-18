@@ -29,7 +29,13 @@ const EditInventory = ({ item }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { ItemName, Price, TotalQty, Location } = itemDetails;
-    fetch(`http://localhost:3001/inventory/edit/${item._id}`, {
+
+    const url =
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:3001/inventory/edit/${item._id}`
+        : `http://localhost:3001/inventory/edit/${item._id}`;
+
+    fetch(url, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({

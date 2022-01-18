@@ -8,8 +8,14 @@ const DeleteInventory = ({ item }) => {
   const { fetchData, removeInventoryData } = useContext(InventoryContext);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const deleteInventoryData = async (val) => {
-    fetch(`http://localhost:3001/inventory/delete/${val._id}`, {
+    const url =
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:3001/inventory/delete/${val._id}`
+        : `https://inventory-management95.herokuapp.com/inventory/delete/${val._id}`;
+
+    fetch(url, {
       method: "DELETE",
       mode: "cors",
     });
