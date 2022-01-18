@@ -28,11 +28,11 @@ const AddInventory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { ItemName, Price, TotalQty, Location } = itemDetails;
-    const url =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3001/inventory"
-        : "https://inventory-management95.herokuapp.com/inventory";
-    fetch(url, {
+    // const url =
+    //   process.env.NODE_ENV === "development"
+    //     ? "http://localhost:3001/inventory"
+    //     : "https://inventory-management95.herokuapp.com/inventory";
+    fetch(`${process.env.REACT_APP_URL}`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({

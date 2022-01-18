@@ -30,12 +30,12 @@ const EditInventory = ({ item }) => {
     e.preventDefault();
     const { ItemName, Price, TotalQty, Location } = itemDetails;
 
-    const url =
-      process.env.NODE_ENV === "development"
-        ? `http://localhost:3001/inventory/edit/${item._id}`
-        : `http://localhost:3001/inventory/edit/${item._id}`;
+    // const url =
+    //   process.env.NODE_ENV === "development"
+    //     ? `http://localhost:3001/inventory/edit/${item._id}`
+    //     : `http://localhost:3001/inventory/edit/${item._id}`;
 
-    fetch(url, {
+    fetch(`${process.env.REACT_APP_URL}/edit/${item._id}`, {
       method: "PUT",
       mode: "cors",
       headers: { "Content-type": "application/json" },
