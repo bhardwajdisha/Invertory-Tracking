@@ -49,7 +49,7 @@ app.use((err, req, res, next) => {
   if (!err.message) err.message = "Oh No!Something Went Wrong";
   res.status(status).send(err.message);
 });
-
-app.listen(3001, (req, res) => {
+const port = process.env.PORT || 3001;
+app.listen(port, (req, res) => {
   console.log("Server started on port 3001");
 });
